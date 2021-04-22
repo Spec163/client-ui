@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --port 8998",
-    "build": "vue-cli-service build --mode $MODE",
+    "build": "vue-cli-service build --mode $NODE_ENV",
     "lint": "vue-cli-service lint",
     "start": "node server.js",
-    "build_production": "vue-cli-service build --mode $MODE",
+    "build_production": "vue-cli-service build --mode $NODE_ENV",
     "start_production": "vue-cli-service serve --mode production",
     "postinstall": "npm run build"
   },
