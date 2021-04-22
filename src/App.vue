@@ -22,7 +22,7 @@
           </v-btn>
         </router-link>
         <v-toolbar-title>
-          ГосПортал
+          ГосПортал 2.0
         </v-toolbar-title>
 
         <v-spacer></v-spacer>
