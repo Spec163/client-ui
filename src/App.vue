@@ -254,7 +254,11 @@ export default {
       this.$store.dispatch('auth/LOGOUT');
       this.$router.push('/login');
     },
-  }
+  },
+  mounted() {
+    console.log(process.env.VUE_APP_URL_BANK)
+    console.log('Message: ', process.env.VUE_APP_MESSAGE)
+  },
 }
 </script>
 
