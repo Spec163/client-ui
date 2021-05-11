@@ -22,49 +22,79 @@
           </v-btn>
         </router-link>
         <v-toolbar-title>
-          ГосПортал 2.0
+          ГосПортал
         </v-toolbar-title>
 
         <v-spacer></v-spacer>
 
-        <router-link to="/sign-up">
-          <v-btn
-              v-if="!GET_USER_IS_ACTIVE"
-              icon
-              :disabled="$route.path === '/sign-up'"
-          >
-            <v-icon>person_add</v-icon>
-          </v-btn>
-        </router-link>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <router-link to="/sign-up">
 
-        <router-link to="/login">
-          <v-btn
-              v-if="!GET_USER_IS_ACTIVE"
-              icon
-              :disabled="$route.path === '/login'"
-          >
-            <v-icon>login</v-icon>
-          </v-btn>
-        </router-link>
+              <v-btn
+                  v-if="!GET_USER_IS_ACTIVE"
+                  icon
+                  :disabled="$route.path === '/sign-up'"
+                  v-bind="attrs"
+                  v-on="on"
+              >
+                <v-icon>person_add</v-icon>
+              </v-btn>
+            </router-link>
+          </template>
+          <span>Регистрация</span>
+        </v-tooltip>
 
-        <router-link to="/profile">
-          <v-btn
-              v-if="GET_USER_IS_ACTIVE"
-              icon
-              :disabled="$route.path === '/profile'"
-          >
-            <v-icon>account_circle</v-icon>
-          </v-btn>
-        </router-link>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <router-link to="/login">
+              <v-btn
+                  v-if="!GET_USER_IS_ACTIVE"
+                  icon
+                  :disabled="$route.path === '/login'"
+                  v-bind="attrs"
+                  v-on="on"
+              >
+                <v-icon>login</v-icon>
+              </v-btn>
+            </router-link>
+          </template>
+          <span>Вход в систему</span>
+        </v-tooltip>
 
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <router-link to="/profile">
+              <v-btn
+                  v-if="GET_USER_IS_ACTIVE"
+                  icon
+                  :disabled="$route.path === '/profile'"
+                  v-bind="attrs"
+                  v-on="on"
+              >
+                <v-icon>account_circle</v-icon>
+              </v-btn>
+            </router-link>
+          </template>
+          <span>Личный кабинет</span>
+        </v-tooltip>
 
-        <v-btn
-            v-if="GET_USER_IS_ACTIVE"
-            icon
-            @click="logout"
-        >
-          <v-icon>exit_to_app</v-icon>
-        </v-btn>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <router-link to="/login">
+              <v-btn
+                  v-if="GET_USER_IS_ACTIVE"
+                  icon
+                  @click="logout"
+                  v-bind="attrs"
+                  v-on="on"
+              >
+                <v-icon>exit_to_app</v-icon>
+              </v-btn>
+            </router-link>
+          </template>
+          <span>Выход из учётной записи</span>
+        </v-tooltip>
 
       </v-app-bar>
 
@@ -119,6 +149,20 @@
             >
               <v-list-item-title>
                 Просмотреть налоги
+              </v-list-item-title>
+            </v-list-item>
+          </v-list-item-group>
+
+          <v-list-item-group
+              v-model="group"
+              active-class="deep-purple--text text--accent-4"
+          >
+            <v-list-item
+                @click="$router.push('/communal/utility-bills')"
+                :disabled="$route.name === 'utility-bills'"
+            >
+              <v-list-item-title>
+                Просмотреть квитанции ЖКХ
               </v-list-item-title>
             </v-list-item>
           </v-list-item-group>
@@ -254,11 +298,7 @@ export default {
       this.$store.dispatch('auth/LOGOUT');
       this.$router.push('/login');
     },
-  },
-  mounted() {
-    console.log(process.env.VUE_APP_URL_BANK)
-    console.log('Message: ', process.env.VUE_APP_MESSAGE)
-  },
+  }
 }
 </script>
 
